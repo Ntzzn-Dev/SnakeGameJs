@@ -17,13 +17,25 @@
   padding: 0 0.75rem;
   pointer-events: none;
 }
-.wrapper::before {
+/*wrapper::before {
   content: "12.5";
   left: 0;
 }
 .wrapper::after {
   content: "100";
   right: 0;
+}*/
+
+#rangehint{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  font-size: xx-large;
+  font-weight: 900;
+  color: #e6e6e6;
+  font-family: system-ui;
+  pointer-events: none;
 }
 
 input[type=range] {

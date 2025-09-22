@@ -3,6 +3,7 @@ let pointsLabel = document.querySelector('.points');
 let pointsGameOverLabel = document.querySelector('.pointgo');
 let button = document.getElementById("startButton");
 let rebutton = document.getElementById("restartButton");
+let rangehint = document.getElementById("rangehint");
 
 const slider = document.getElementById("sizeSnake");
 
@@ -21,18 +22,7 @@ panel.style.height = limiteY + "px";
 
 let addValue = gridValue;
 
-slider.addEventListener("input", () => {
-  gridValue = parseFloat(slider.value);
-  addValue = gridValue;
-
-  limiteX = Math.round((window.innerWidth - 100) / gridValue) * gridValue;
-  limiteY = Math.round((window.innerHeight - 100) / gridValue) * gridValue; // Corrigir pxs extras
-
-  panel.style.width = limiteX + "px";
-  panel.style.height = limiteY + "px";
-
-  document.documentElement.style.setProperty("--grid-size", gridValue + "px");
-});
+slider.addEventListener("input", correcaoGrid);
 
 let lastCoordHead = ['0px:0px'];
 let snakeBody = [];
@@ -54,6 +44,8 @@ let colors = [];
 -2 = cima
 2 = baixo
 */
+
+correcaoGrid();
 
 document.addEventListener('keydown', function(event) {
   switch (event.key) {
@@ -116,6 +108,20 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
+function correcaoGrid(){  
+  rangehint.innerHTML = slider.value;
+  gridValue = parseFloat(slider.value);
+  addValue = gridValue;
+
+  limiteX = Math.round((window.innerWidth - 100) / gridValue) * gridValue;
+  limiteY = Math.round((window.innerHeight - 100) / gridValue) * gridValue;
+
+  panel.style.width = limiteX + "px";
+  panel.style.height = limiteY + "px";
+
+  document.documentElement.style.setProperty("--grid-size", gridValue + "px");
+}
+
 function reiniciarIntervalo(){
   posicaoX = 0;
   posicaoY = 0;
@@ -132,6 +138,8 @@ function reiniciarIntervalo(){
   intervalId = null;
 
   panel.innerHTML = '';
+  pointsLabel.innerHTML = "Points: " + points;
+  pointsGameOverLabel.innerHTML = "Pontuation: " + points;
 
   iniciarIntervalo();
 }
@@ -174,7 +182,12 @@ function iniciarIntervalo() {
         posY = Math.floor(posY / gridValue) * gridValue;
 
         actualPoint = document.createElement('div');
-        actualPoint.classList.add('point');
+        actualPoint.classList.add('pointext');
+        pointinside = document.createElement('div');
+        pointinside.classList.add('point');
+
+        actualPoint.appendChild(pointinside);
+
 
         panel.appendChild(actualPoint);
 
@@ -233,7 +246,7 @@ function iniciarIntervalo() {
 function addPoint(){
   points++;
   pointsLabel.innerHTML = "Points: " + points;
-  pointsGameOverLabel.innerHTML = "Points: " + points;
+  pointsGameOverLabel.innerHTML = "Pontuation: " + points;
 
   addSnakeWidth();
 }

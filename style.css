@@ -1,0 +1,88 @@
+:root {
+  --grid-size: 25px;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.canva{
+  background-color: rgb(25, 65, 48);
+  position: relative;
+  top: 50px;
+  border-radius: calc(var(--grid-size) / 2);
+}
+
+.snakeblk{
+  width: var(--grid-size);
+  height: var(--grid-size);
+  background-color: #ffd900;
+  position: absolute;
+  border-radius: 50%;
+  color: #000000;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  font-family: fantasy;
+}
+
+.point{
+  width: var(--grid-size);
+  height: var(--grid-size);
+  background-color: red;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.point.pop {
+  animation: pop 0.3s ease-out;
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  padding: 10px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 200px;
+  background-color: #0b0b1a;
+  border-radius: 300px;
+
+  h1, label{
+    font-weight: 900;
+    color: #e6e6e6;
+  }
+
+  .subitem{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.gameover {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  padding: 20px 40px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgb(255 0 0 / 56%);
+  color: #ff00009e;
+}
+
+.hidden{
+  visibility: hidden;
+}

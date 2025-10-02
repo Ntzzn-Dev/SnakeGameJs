@@ -10,6 +10,10 @@ const slider = document.getElementById("sizeSnake");
 button.addEventListener("click", iniciarIntervalo);
 rebutton.addEventListener("click", reiniciarIntervalo);
 
+document.getElementById("restartButton").addEventListener('click', () => {
+  window.electronAPI.closeApp()
+})
+
 let posicaoX = 0;
 let posicaoY = 0;
 

@@ -1,0 +1,33 @@
+{
+  "name": "snakegamejs",
+  "version": "1.0.0",
+  "description": "Este é o clássico Jogo da Cobra, desenvolvido para ser jogado diretamente no navegador. O objetivo do jogo é controlar a cobra, coletando alimentos e evitando colisões com as paredes ou com o próprio corpo. A cada pedaço de comida consumido, a cobra cresce, tornando o desafio cada vez mais complexo.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.ntzzn.snakegamejs",
+    "productName": "JSnakeGame",
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Snake"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^38.2.0",
+    "electron-builder": "^26.0.12"
+  }
+}

@@ -3,6 +3,7 @@ let pointsLabel = document.querySelector('.points');
 let pointsGameOverLabel = document.querySelector('.pointgo');
 let button = document.getElementById("startButton");
 let rebutton = document.getElementById("restartButton");
+let quitButtons = document.querySelectorAll(".quitButton");
 let rangehint = document.getElementById("rangehint");
 
 const slider = document.getElementById("sizeSnake");
@@ -10,8 +11,10 @@ const slider = document.getElementById("sizeSnake");
 button.addEventListener("click", iniciarIntervalo);
 rebutton.addEventListener("click", reiniciarIntervalo);
 
-document.getElementById("restartButton").addEventListener('click', () => {
-  window.electronAPI.closeApp()
+quitButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    window.electronAPI.closeApp()
+  })
 })
 
 let posicaoX = 0;
@@ -27,6 +30,7 @@ panel.style.height = limiteY + "px";
 let addValue = gridValue;
 
 slider.addEventListener("input", correcaoGrid);
+window.addEventListener("resize", correcaoGrid);
 
 let lastCoordHead = ['0px:0px'];
 let snakeBody = [];
@@ -41,55 +45,48 @@ let nextDir = 1;
 let startHex = '#ffd900';
 let endHex = '#66ff00';
 let colors = [];
-/*
--1 = esquerda
-1 = direita
-
--2 = cima
-2 = baixo
-*/
 
 correcaoGrid();
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
   switch (event.key) {
     case 'ArrowUp':
-      if(dir == 2) return;
+      if (dir == 2) return;
       nextDir = -2;
       addValue = -gridValue;
       break;
     case 'ArrowDown':
-      if(dir == -2) return;
+      if (dir == -2) return;
       nextDir = 2;
       addValue = gridValue;
       break;
     case 'ArrowLeft':
-      if(dir == 1) return;
+      if (dir == 1) return;
       nextDir = -1;
       addValue = -gridValue;
       break;
     case 'ArrowRight':
-      if(dir == -1) return;
+      if (dir == -1) return;
       nextDir = 1;
       addValue = gridValue;
       break;
     case 'w':
-      if(dir == 2) return;
+      if (dir == 2) return;
       nextDir = -2;
       addValue = -gridValue;
       break;
     case 's':
-      if(dir == -2) return;
+      if (dir == -2) return;
       nextDir = 2;
       addValue = gridValue;
       break;
     case 'a':
-      if(dir == 1) return;
+      if (dir == 1) return;
       nextDir = -1;
       addValue = -gridValue;
       break;
     case 'd':
-      if(dir == -1) return;
+      if (dir == -1) return;
       nextDir = 1;
       addValue = gridValue;
       break;
@@ -112,7 +109,7 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-function correcaoGrid(){  
+function correcaoGrid() {
   rangehint.innerHTML = slider.value;
   gridValue = parseFloat(slider.value);
   addValue = gridValue;
@@ -126,7 +123,7 @@ function correcaoGrid(){
   document.documentElement.style.setProperty("--grid-size", gridValue + "px");
 }
 
-function reiniciarIntervalo(){
+function reiniciarIntervalo() {
   posicaoX = 0;
   posicaoY = 0;
 
@@ -148,7 +145,7 @@ function reiniciarIntervalo(){
   iniciarIntervalo();
 }
 
-function addSnakeWidth(){
+function addSnakeWidth() {
   let body = document.createElement('div');
   body.classList.add('snakeblk');
 
@@ -174,13 +171,13 @@ function iniciarIntervalo() {
   if (intervalId === null) {
     intervalId = setInterval(() => {
       dir = nextDir;
-      if(actualPoint == null){
-        do {  
-          let gridX = Math.floor((limiteX-gridValue) / gridValue);
+      if (actualPoint == null) {
+        do {
+          let gridX = Math.floor((limiteX - gridValue) / gridValue);
           posX = Math.floor(Math.random() * gridX) * gridValue;
-          let gridY = Math.floor((limiteY-gridValue) / gridValue);
+          let gridY = Math.floor((limiteY - gridValue) / gridValue);
           posY = Math.floor(Math.random() * gridY) * gridValue;
-        } while (lastCoordHead.includes(posX + "px:" + posY + "px")); 
+        } while (lastCoordHead.includes(posX + "px:" + posY + "px"));
 
         posX = Math.floor(posX / gridValue) * gridValue;
         posY = Math.floor(posY / gridValue) * gridValue;
@@ -201,35 +198,35 @@ function iniciarIntervalo() {
         posX = parseFloat(actualPoint.style.left);
         posY = parseFloat(actualPoint.style.top);
 
-        if(posX == posicaoX && posY == posicaoY){
+        if (posX == posicaoX && posY == posicaoY) {
           animatePoint();
           addPoint();
         }
       }
 
-      if(dir%2==0){
-        if((posicaoY < limiteY - addValue && posicaoY + addValue >= 0) &&
+      if (dir % 2 == 0) {
+        if ((posicaoY < limiteY - addValue && posicaoY + addValue >= 0) &&
           !lastCoordHead.slice(1).includes(snakeBody[0].style.left + ":" + (parseInt(snakeBody[0].style.top) + addValue) + "px")
-        ){
-          lastCoordHead.push(snakeBody[0].style.left+":"+snakeBody[0].style.top);
-          if(lastCoordHead.length > points + 1){
+        ) {
+          lastCoordHead.push(snakeBody[0].style.left + ":" + snakeBody[0].style.top);
+          if (lastCoordHead.length > points + 1) {
             lastCoordHead.shift();
-          }     
+          }
 
           posicaoY += addValue;
           snakeBody[0].style.top = posicaoY + "px";
         } else {
           gameOver();
         }
-      }else {
-        if((posicaoX < limiteX - addValue && posicaoX + addValue >= 0) &&
+      } else {
+        if ((posicaoX < limiteX - addValue && posicaoX + addValue >= 0) &&
           !lastCoordHead.slice(1).includes((parseInt(snakeBody[0].style.left) + addValue) + "px" + ":" + snakeBody[0].style.top)
-        ){
-          lastCoordHead.push(snakeBody[0].style.left+":"+snakeBody[0].style.top);
-          if(lastCoordHead.length > points + 1){
+        ) {
+          lastCoordHead.push(snakeBody[0].style.left + ":" + snakeBody[0].style.top);
+          if (lastCoordHead.length > points + 1) {
             lastCoordHead.shift();
           }
-          
+
           posicaoX += addValue;
           snakeBody[0].style.left = posicaoX + "px";
         } else {
@@ -247,15 +244,15 @@ function iniciarIntervalo() {
   }
 }
 
-function addPoint(){
+function addPoint() {
   points++;
-  pointsLabel.innerHTML = "Points: " + points;
+  pointsLabel.querySelector("span").innerHTML = points;
   pointsGameOverLabel.innerHTML = "Pontuation: " + points;
 
   addSnakeWidth();
 }
 
-function animatePoint(){
+function animatePoint() {
   let pointAnm = actualPoint;
 
   actualPoint = null;
@@ -267,7 +264,7 @@ function animatePoint(){
   });
 }
 
-function gameOver(){
+function gameOver() {
   gameOverModal();
   clearInterval(intervalId);
   slider.disabled = false;

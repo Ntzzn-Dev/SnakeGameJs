@@ -26,6 +26,6 @@ Apenas entre no link hospedado pelo github:
   
 ## Baixar  
 Clique para baixar o launcher do jogo:  
-[Baixar JSnake](https://github.com/Ntzzn-Dev/SnakeGameJs/releases/download/1.0/JSnake.Game.Setup.1.0.0.exe)   
+[Baixar JSnake](https://github.com/Ntzzn-Dev/SnakeGameJs/releases/download/2.2.0/JSnakeGame.Setup.2.2.0.exe)   
 
 Veja o changelog completo em [CHANGELOG.md](CHANGELOG.md)

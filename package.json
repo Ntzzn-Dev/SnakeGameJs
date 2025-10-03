@@ -13,7 +13,7 @@
     "productName": "JSnakeGame",
     "win": {
       "target": "nsis",
-      "icon": "assets/icon.ico"
+      "icon": "assets/icons/icon.ico"
     },
     "nsis": {
       "oneClick": false,

@@ -19,7 +19,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true
     },
-    icon: path.join(__dirname, 'assets/icon.png')
+    icon: path.join(__dirname, 'assets/icons/icon.png')
   })
 
   win.loadFile(path.join(__dirname, 'index.html'))

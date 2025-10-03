@@ -12,6 +12,32 @@
 
 Este é o clássico Jogo da Cobra, desenvolvido para ser jogado diretamente no navegador. O objetivo do jogo é controlar a cobra, coletando alimentos e evitando colisões com as paredes ou com o próprio corpo. A cada pedaço de comida consumido, a cobra cresce, tornando o desafio cada vez mais complexo.     
 
+## Demonstração  
+
+### Tela Inicial  
+Uma tela simples com a opção de começar o jogo ou trocar o tamanho dos circulos (o padrão é 25).  
+<p float="left">
+<img src="assets/start.png" width="500"/>
+</p>
+
+### Durante o jogo  
+O tamanho da área jogável também muda conforme o tamanho dos circulos.    
+<p float="left">
+<img src="assets/size25.png" width="500"/>
+</p>
+
+### Tamanho diferente 
+Quanto maior o tamanho, menor a área de jogo, tornando mais dificil fazer manobras.    
+<p float="left">
+<img src="assets/size75.png" width="500"/>
+</p>
+
+### Game Over
+Ao bater em si mesmo ou em uma das bordas, a tela de game over aparece, dando a opção de recomeçar, mudar o tamanho ou sair.    
+<p float="left">
+<img src="assets/gameover.png" width="500"/>
+</p>
+
 ## Editar
 Cole no terminal
 ```
